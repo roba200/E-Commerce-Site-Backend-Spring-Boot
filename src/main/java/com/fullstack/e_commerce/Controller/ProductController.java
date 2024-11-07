@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fullstack.e_commerce.Entity.Product;
 import com.fullstack.e_commerce.Service.ProductService;
-
 import java.math.BigDecimal;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -42,19 +41,9 @@ public class ProductController {
     }
     @PostMapping
     public ResponseEntity<String> addProduct(
-            @RequestParam String name,
-            @RequestParam String description,
-            @RequestParam BigDecimal price,
-            @RequestParam Integer quantityInStock,
-            @RequestParam String imageUrl1,
-            @RequestParam String imageUrl2,
-            @RequestParam String imageUrl3,
-            @RequestParam String imageUrl4,
-            @RequestParam String imageUrl5,
-            @RequestParam Float rating,
-            @RequestParam String category) {
+            @RequestBody Product product) {
 
-        productService.addProduct(name, description, price, quantityInStock, imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, rating, category);
+        productService.addProduct(product.getName(), product.getDescription(), product.getPrice(), product.getQuantityInStock(), product.getImageUrl1(), product.getImageUrl2(), product.getImageUrl3(), product.getImageUrl4(), product.getImageUrl5(), product.getRating(), product.getCategory());
         return ResponseEntity.ok("Product added successfully");
     }
 
